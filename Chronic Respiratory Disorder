@@ -1,0 +1,26 @@
+-- Step 1: Identify patients with Chronic Respiratory Disorder (CRD)
+SELECT 
+    patient_id,
+    patient_name,
+    medical_condition
+FROM
+    patients
+WHERE
+    medical_condition = 'Chronic Respiratory Disorder';
+
+-- Step 2: Analyze lab test results for patients with Chronic Respiratory Disorder (CRD)
+SELECT 
+    l.patient_id,
+    l.test_name,
+    AVG(l.result_value) AS average_result,
+    MAX(l.result_value) AS max_result,
+    MIN(l.result_value) AS min_result
+FROM
+    lab_results l
+JOIN
+    patients p ON l.patient_id = p.patient_id
+WHERE
+    p.medical_condition = 'Chronic Respiratory Disorder'
+GROUP BY
+    l.patient_id,
+    l.test_name;
