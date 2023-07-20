@@ -1,0 +1,18 @@
+-- Step 1: Find the appointments and patients with their arrival times
+SELECT 
+    appointment_id,
+    patient_name,
+    appointment_time,
+    arrival_time
+FROM
+    appointments;
+
+-- Step 2: Calculate the wait time for each appointment
+SELECT 
+    appointment_id,
+    patient_name,
+    appointment_time,
+    arrival_time,
+    TIMEDIFF(arrival_time, appointment_time) AS wait_time
+FROM
+    appointments;
