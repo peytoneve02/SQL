@@ -1,0 +1,30 @@
+-- Step 1: Find the patients admitted in the last quarter
+SELECT 
+    patient_id,
+    patient_name,
+    admission_date,
+    discharge_date
+FROM
+    patients
+WHERE
+    admission_date >= '2023-04-01' AND admission_date < '2023-07-01';
+
+-- Step 2: Calculate the length of stay for each patient in days
+SELECT 
+    patient_id,
+    patient_name,
+    admission_date,
+    discharge_date,
+    DATEDIFF(discharge_date, admission_date) AS length_of_stay
+FROM
+    patients
+WHERE
+    admission_date >= '2023-04-01' AND admission_date < '2023-07-01';
+
+-- Step 3: Find the average length of stay for patients admitted in the last quarter
+SELECT 
+    AVG(DATEDIFF(discharge_date, admission_date)) AS average_length_of_stay
+FROM
+    patients
+WHERE
+    admission_date >= '2023-04-01' AND admission_date < '2023-07-01';
